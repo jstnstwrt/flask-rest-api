@@ -1,5 +1,6 @@
 from flask import jsonify, Blueprint
-from flask.ext.restful import Resource, Api, reqparse, inputs, fields
+from flask.ext.restful import (Resource, Api, reqparse, inputs, fields, 
+                               marshal, marshal_with)
 
 import models
 
@@ -31,7 +32,8 @@ class CourseList(Resource):
         super().__init__()
 
     def get(self):
-        courses = models.Course.select()
+        courses = [marshal(course,course_fields) 
+                    for course in models.Course.select()]
         return {'courses': courses}
 
     def post(self):
