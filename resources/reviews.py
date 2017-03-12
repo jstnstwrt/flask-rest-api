@@ -96,6 +96,7 @@ class Review(Resource):
     def get(self, id):
         return add_course(review_or_404(id))
 
+    @marshal_with(review_fields)
     def put(self, id):
         args = self.reqparse.parse_args()
         query = models.Review.update(**args).where(models.Review.id==id)
