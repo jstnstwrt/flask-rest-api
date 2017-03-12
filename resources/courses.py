@@ -105,6 +105,6 @@ api.add_resource(
 
 api.add_resource(
     Course,
-    '/courses/<int:id>',
+    '/course/<int:id>',
     endpoint='course'
 )
