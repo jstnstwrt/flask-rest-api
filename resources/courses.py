@@ -54,7 +54,7 @@ class CourseList(Resource):
         args = self.reqparse.parse_args()
         course = models.Course.create(**args)
         return (add_reviews(course), 201, {
-                'Location': url_for(resources.courses.course), id=course.id)
+                'Location': url_for(resources.courses.course, id=course.id)
                 })
 
 
