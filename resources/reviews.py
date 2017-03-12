@@ -5,7 +5,7 @@ from flask.ext.restful import (Resource, Api, reqparse, inputs,
 import models
 
 review_fields = {
-    'id' = fields.Integer,
+    'id' : fields.Integer,
     'for_course': fields.String,
     'rating': fields.Integer,
     'comment': fields.String(default=''),
