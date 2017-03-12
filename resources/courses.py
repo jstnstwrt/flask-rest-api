@@ -44,10 +44,10 @@ class CourseList(Resource):
         )
         super().__init__()
 
+    @marshal_with(course_fields)
     def get(self):
-        courses = [marshal(add_reviews(course),course_fields) 
-                    for course in models.Course.select()]
-        return {'courses': courses}
+        courses = [add_reviews(course) for course in models.Course.select()]
+        return courses
 
     @marshal_with(course_fields)
     def post(self):
