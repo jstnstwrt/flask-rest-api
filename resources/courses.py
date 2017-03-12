@@ -12,11 +12,6 @@ course_fields = {
     'reviews': fields.List(fields.String)
 }
 
-def add_reviews(course):
-    course.reviews = [url_for('resources.reviews.review', id=review.id)
-                        for review in course.review_set]
-    return course
-
 def course_or_404(course_id):
     try:
         course = models.Course.get(models.Course.id==course_id)
@@ -24,6 +19,11 @@ def course_or_404(course_id):
         abort(404)
     else:
         return course
+
+def add_reviews(course):
+    course.reviews = [url_for('resources.reviews.review', id=review.id)
+                        for review in course.review_set]
+    return course
 
 class CourseList(Resource):
     

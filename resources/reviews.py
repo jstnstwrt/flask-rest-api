@@ -1,8 +1,29 @@
-from flask import jsonify, Blueprint
-from flask.ext.restful import Resource, Api, reqparse, inputs
+from flask import jsonify, Blueprint, abort
+from flask.ext.restful import (Resource, Api, reqparse, inputs,
+                                url_for, marshal, marshal_with)
 
 import models
 
+review_fields = {
+    'id' = fieldsm
+    'for_course': fields.String,
+    'rating': fields.Integer,
+    'comment': fields.String(default=''),
+    'created_at': fields.DateTime
+}
+
+def review_or_404(review_id):
+    try:
+        review = models.Review.get(models.Review.id==review_id)
+    except models.Review.DoesNotExist:
+        abort(404)
+    else:
+        return review
+
+def add_course(review):
+    review.for_course = url_for('resources.courses.course', 
+                                id=review.course.id)
+    return review
 
 class ReviewList(Resource):
 
@@ -33,17 +54,22 @@ class ReviewList(Resource):
 
 
     def get(self):
-        return jsonify({'reviews': [{'course': 1, 'rating': 5}]})
+        reviews = [marshal(add_course(review),review_fields) 
+                    for review in models.Review.select()]
+        return {'reviews' : reviews}
 
+    @marshal_with(review_fields)
     def post(self):
         args = self.reqparse.parse_args()
-        models.Review.create(**args)
-        return jsonify({'reviews': [{'course': 1, 'rating': 5}]})
+        review = models.Review.create(**args)
+        return add_course(review)
 
 
 class Review(Resource):
+
+    @marshal_with(review_fields)
     def get(self, id):
-        return jsonify({'course': 1, 'rating': 5})
+        return add_course(review_or_404(id))
 
     def put(self, id):
         return jsonify({'course': 1, 'rating': 5})
