@@ -47,7 +47,7 @@ class CourseList(Resource):
     @marshal_with(course_fields)
     def get(self):
         courses = [add_reviews(course) for course in models.Course.select()]
-        return courses
+        return {'courses': courses}
 
     @marshal_with(course_fields)
     def post(self):
