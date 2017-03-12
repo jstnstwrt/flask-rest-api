@@ -4,12 +4,12 @@ from flask.ext.restful import (Resource, Api, reqparse, inputs, fields,
 
 import models
 
-## Argument Parsing
 course_fields = {
     'id': fields.Integer,
     'title': fields.String,
     'url': fields.String,
-    'reviews': fields.List(fields.String)
+    'reviews': fields.List(fields.String),
+    'created_at': fields.DateTime
 }
 
 def course_or_404(course_id):
