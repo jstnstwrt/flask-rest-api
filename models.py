@@ -33,5 +33,6 @@ class Review(Model):
 
 def initialize():
     DATABASE.connect()
+    DATABASE.rollback()
     DATABASE.create_tables([Course,Review], safe=True)
     DATABASE.close()
