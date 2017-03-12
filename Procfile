@@ -1,1 +1,1 @@
-web: python flask-restful-api/app.py
+web: python app.py
