@@ -4,10 +4,16 @@ import urllib.parse
 from peewee import *
 
 urllib.parse.uses_netloc.append('postgres')
-url = urllib.parse.urlparse(os.environ.get('DATABASE_URL','postgres://localhost:5432/postgres'))
+url = urllib.parse.urlparse(os.environ.get('DATABASE_URL','postgres://justinstewart:@localhost:5432/postgres'))
+
+print(url.path[1:])
+print(url.username)
+print(url.hostname)
+
 
 DATABASE = PostgresqlDatabase(
     url.path[1:],
+    user=url.username,
     password= url.password,
     host= url.hostname,
     port= url.port
