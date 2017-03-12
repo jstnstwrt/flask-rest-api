@@ -23,7 +23,7 @@ class Course(Model):
         database = DATABASE
 
 class Review(Model):
-    course = ForeignKeyField(Course,related_name='review_set')
+    course = ForeignKeyField(Course, related_name='review_set')
     rating = IntegerField()
     comment = TextField(default='')
     created_at = DateTimeField(default=datetime.datetime.now)
