@@ -19,7 +19,7 @@ class ReviewList(Resource):
             'rating',
             type=inputs.int_range(1,5),
             required=True,
-            help='No course rating provided.'
+            help='No course rating provided.',
             location=['form','json']
         )
         self.reqparse.add_argument(
