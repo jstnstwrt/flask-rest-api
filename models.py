@@ -1,8 +1,17 @@
 import datetime
-
+import os
+import urllib.parse
 from peewee import *
 
-DATABASE = SqliteDatabase('courses.sqlite')
+urllib.parse.uses_netloc.append('postgres')
+url = urllib.parse.urlparse(os.environ.get('DATABASE_URL','postgres://localhost:5432/postgres'))
+
+DATABASE = PostgresqlDatabase(
+    url.path[1:],
+    password= url.password,
+    host= url.hostname,
+    port= url.port
+)
 
 class Course(Model):
     title = CharField()
