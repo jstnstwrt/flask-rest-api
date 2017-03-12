@@ -90,7 +90,7 @@ class Course(Resource):
                 {'Location':url_for('resources.courses.course',id=id)})
 
     def delete(self, id):
-        query = models.Course.delete(models.Course.id==id)
+        query = models.Course.delete().where(models.Course.id==id)
         query.execute()
         return ('', 204, {'Location':url_for('resources.courses.courses')})
 
