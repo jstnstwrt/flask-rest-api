@@ -40,12 +40,12 @@ api = Api(courses_api)
 
 api.add_resource(
     CourseList,
-    'courses',
+    '/courses',
     endpoint='courses'
 )
 
 api.add_resource(
     Course,
-    'courses/<int:id>',
+    '/courses/<int:id>',
     endpoint='course'
 )

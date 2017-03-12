@@ -21,6 +21,7 @@ class Review(Resource):
 
 reviews_api = Blueprint('resources.reviews', '__name__')
 api = Api(reviews_api)
+
 api.add_resource(
     ReviewList,
     '/reviews',
