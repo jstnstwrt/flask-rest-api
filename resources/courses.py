@@ -5,6 +5,7 @@ import models
 
 
 class CourseList(Resource):
+    
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument(
@@ -22,6 +23,10 @@ class CourseList(Resource):
         super().__init__()
 
     def get(self):
+        return jsonify({'courses': [{'title': 'Python Basics'}]})
+
+    def post(self):
+        args = self.reqparse.parse_args()
         return jsonify({'courses': [{'title': 'Python Basics'}]})
 
 
